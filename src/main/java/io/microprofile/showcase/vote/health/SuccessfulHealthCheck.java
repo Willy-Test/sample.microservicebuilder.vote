@@ -25,14 +25,6 @@ public class SuccessfulHealthCheck implements HealthCheck {
 	private SessionVote sessionVote;
 	@Override
 	public HealthCheckResponse call() {
-		try {
-			if(sessionVote.nessProbe().getStatus()==200) {
-				return HealthCheckResponse.named("Vote:successful-check").up().build();
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return HealthCheckResponse.named("Vote:failed-check").down().build();
+		return HealthCheckResponse.named("Vote:successful-check").up().build();
 	}
 }

@@ -21,9 +21,6 @@ import io.microprofile.showcase.vote.api.SessionVote;
 @ApplicationScoped
 public class FailedHealthCheck implements HealthCheck{
 	
-	@Inject 
-	private SessionVote sessionVote;
-	
 	@Inject HealthCheckBean healthCheckBean;
 
 	@Inject 
@@ -31,10 +28,7 @@ public class FailedHealthCheck implements HealthCheck{
     @Override
     public HealthCheckResponse call() {
 		try {
-			if(sessionVote.nessProbe().getStatus()!=200 || ((isAppDown.isPresent()) && (isAppDown.get().equals("true")))) {
-				return HealthCheckResponse.named("Vote:failed-check").down().build();
-			}
-			else if(healthCheckBean.getIsAppDown()!=null && healthCheckBean.getIsAppDown().booleanValue()==true) {
+				if(healthCheckBean.getIsAppDown()!=null && healthCheckBean.getIsAppDown().booleanValue()==true) {
 				return HealthCheckResponse.named("Vote:failed-check").down().build();
 			}
 		} catch (Exception e) {

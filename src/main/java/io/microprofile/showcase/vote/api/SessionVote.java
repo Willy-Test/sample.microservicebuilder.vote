@@ -87,17 +87,6 @@ public class SessionVote {
         return "Microservice Session Vote Application";
     }
 
-    // For use as a k8s readinessProbe for this service
-    @GET
-    @Path("/nessProbe")
-    @Produces(TEXT_PLAIN)
-    @Counted(name="io.microprofile.showcase.vote.api.SessionVote.nessProbe.monotonic.absolute(true)",monotonic=true,absolute=true,tags="app=vote")
-    //@Counted(name="io.microprofile.showcase.vote.api.SessionVote.nessProbe.monotonic.absolute(false)",monotonic=true,absolute=false)
-    public Response nessProbe() throws Exception {
-
-        return Response.ok("vote ready at " + Calendar.getInstance().getTime()).build();
-    }
-
     public void setAttendeeSessionRating(AttendeeDAO attendee, SessionRatingDAO rating) {
         this.selectedAttendeeDAO = attendee;
         this.selectedSessionRatingDAO = rating;
